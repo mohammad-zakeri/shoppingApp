@@ -1,80 +1,77 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopping_app/feature_intro/presentation/screens/intro_main_wrapper.dart';
+import 'common/blocs/bottom_nav_cubit/bottom_nav_cubit.dart';
+import 'feature_splash/presentation/bloc/splash_cubit.dart';
+import 'feature_splash/presentation/screens/splash_screen.dart';
+import 'locator.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  HttpOverrides.global = MyHttpOverrides();
+
+  await initLocator();
+
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_)=> SplashCubit()),
+        BlocProvider(create: (_)=> BottomNavCubit()),
+        // BlocProvider(create: (_) => locator<SignupBloc>()),
+        // BlocProvider(create: (_) => locator<LoginBloc>()),
+      ],
+      child: const MyApp(),
+    ),
+  );
+
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
+      title: 'shopping app',
+      debugShowCheckedModeBanner: false,
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+      themeMode: ThemeMode.light,
+      // theme: MyThemes.lightTheme,
+      // darkTheme: MyThemes.darkTheme,
 
-  final String title;
+      initialRoute: "/",
+      locale: const Locale("fa",""),
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
+      // localizationsDelegates: const [
+      //   GlobalMaterialLocalizations.delegate,
+      //   GlobalWidgetsLocalizations.delegate,
+      //   GlobalCupertinoLocalizations.delegate,
+      // ],
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+      // supportedLocales: const [
+      //   Locale("en",""),
+      //   Locale("fa",""),
+      // ],
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+      routes: {
+        IntroMainWrapper.routeName: (context)=> IntroMainWrapper(),
+        // MainWrapper.routeName: (context)=> MainWrapper(),
+        // MobileSignUpScreen.routeName: (context)=> MobileSignUpScreen(),
+        // AllProductsScreen.routeName: (context)=> AllProductsScreen(),
+      },
 
-  @override
-  Widget build(BuildContext context) {
-
-    return Scaffold(
-
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-
-      body: Center(
-
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-
-          children: <Widget>[
-
-            const Text('You have pushed the button this many times:'),
-
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-
-          ],
-        ),
-
-      ),
-
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-
+      home: const SplashScreen(),
     );
 
   }
 
+}
+
+class MyHttpOverrides extends HttpOverrides{
+  @override
+  HttpClient createHttpClient(SecurityContext? context){
+    return super.createHttpClient(context)..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
+  }
 }
