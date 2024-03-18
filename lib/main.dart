@@ -50,10 +50,10 @@ class MyApp extends StatelessWidget {
       //   GlobalCupertinoLocalizations.delegate,
       // ],
 
-      // supportedLocales: const [
-      //   Locale("en",""),
-      //   Locale("fa",""),
-      // ],
+      supportedLocales: const [
+        Locale("en",""),
+        Locale("fa",""),
+      ],
 
       routes: {
         IntroMainWrapper.routeName: (context)=> IntroMainWrapper(),
