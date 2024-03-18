@@ -22,10 +22,12 @@ class IntroMainWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    ///get data by pushNamedAndRemoveUntil arguments
     // final args = ModalRoute.of(context)!.settings.arguments as String;
-    /// get device size
-    var height = MediaQuery.of(context).size.height;
+
     var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
 
     return BlocProvider(
       create: (context) => IntroCubit(),
