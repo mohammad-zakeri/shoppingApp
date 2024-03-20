@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import '../resources/data_state.dart';
 import 'app_exception.dart';
@@ -43,4 +42,5 @@ class CheckExceptions {
         return DataFailed(appException.message);
     }
   }
+
 }

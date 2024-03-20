@@ -7,14 +7,16 @@ class DotLoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Directionality(
       textDirection: TextDirection.ltr,
+
       child: Center(
-          child: LoadingAnimationWidget.prograssiveDots(
-            size: size,
-            color: Colors.redAccent,
-          ),
+        child: LoadingAnimationWidget.prograssiveDots(size: size, color: Colors.redAccent),
       ),
+
     );
+
   }
+
 }
