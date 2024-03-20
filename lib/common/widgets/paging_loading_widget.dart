@@ -7,14 +7,16 @@ class PagingLoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Directionality(
       textDirection: TextDirection.ltr,
+
       child: Center(
-          child: LoadingAnimationWidget.threeArchedCircle(
-            size: size,
-            color: Colors.redAccent,
-          ),
+        child: LoadingAnimationWidget.threeArchedCircle(size: size, color: Colors.redAccent),
       ),
+
     );
+
   }
+
 }

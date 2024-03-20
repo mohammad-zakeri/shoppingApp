@@ -1,8 +1,7 @@
 import 'package:bloc/bloc.dart';
 
-
-class SearchboxCubit extends Cubit<bool> {
-  SearchboxCubit() : super(true);
+class SearchBoxCubit extends Cubit<bool> {
+  SearchBoxCubit() : super(true);
 
   void changeVisibility(bool newValue){
     emit(newValue);
