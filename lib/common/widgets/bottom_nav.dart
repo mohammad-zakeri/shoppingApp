@@ -31,7 +31,7 @@ class BottomNav extends StatelessWidget {
               children: [
 
                 SizedBox(
-                  width: MediaQuery.of(context).size.width / 2,
+                  width: MediaQuery.of(context).size.width / 2.2,
                   height: 72,
 
                   child: Row(
@@ -51,6 +51,8 @@ class BottomNav extends StatelessWidget {
                             icon: Image.asset(
                               state == 0 ? "assets/images/home_icon.png" : "assets/images/home_icon2.png",
                               color: state == 0 ? Colors.red : Colors.grey.shade700,
+                              width: 30,
+                              height: 30,
                             ),
                           ),
 
@@ -73,7 +75,8 @@ class BottomNav extends StatelessWidget {
                             icon: Image.asset(
                               state == 1 ? "assets/images/category_icon.png" : "assets/images/category_icon2.png",
                               color: state == 1 ? Colors.red : Colors.grey.shade700,
-                              width: 40,
+                              width: 30,
+                              height: 30,
                             ),
                           ),
 
@@ -91,7 +94,7 @@ class BottomNav extends StatelessWidget {
                 ),
 
                 SizedBox(
-                  width: MediaQuery.of(context).size.width / 2,
+                  width: MediaQuery.of(context).size.width / 2.2,
                   height: 72,
 
                   child: Row(
@@ -110,7 +113,8 @@ class BottomNav extends StatelessWidget {
                             icon: SvgPicture.asset(
                               state == 2 ? "assets/images/person_icon.svg" : "assets/images/person_icon2.svg",
                               color: state == 2 ? Colors.red : Colors.grey.shade700,
-                              width: 48,
+                              width: 30,
+                              height: 30,
                             ),
                           ),
 
