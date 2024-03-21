@@ -10,6 +10,7 @@ class SplashCubit extends Cubit<SplashState> {
   SplashCubit() : super(SplashState(connectionStatus: ConnectionInitial()));
 
   void checkConnectionEvent() async {
+
     emit(state.copyWith(newConnectionStatus: ConnectionInitial()));
 
     bool isConnect = await splashRepository.checkConnectivity();

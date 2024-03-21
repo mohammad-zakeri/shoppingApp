@@ -2,6 +2,7 @@ import 'package:delayed_widget/delayed_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping_app/common/utils/prefs_operator.dart';
+import 'package:shopping_app/common/widgets/main_wrapper.dart';
 import 'package:shopping_app/feature_intro/presentation/bloc/intro_cubit.dart';
 import 'package:shopping_app/feature_intro/presentation/widgets/intro_page.dart';
 import 'package:shopping_app/locator.dart';
@@ -81,7 +82,7 @@ class IntroMainWrapper extends StatelessWidget {
                               prefsOperator.changeIntroState();
 
                               /// goto home screen
-                              // Navigator.pushNamedAndRemoveUntil(context, MainWrapper.routeName, ModalRoute.withName("main_wrapper"),);
+                              Navigator.pushNamedAndRemoveUntil(context, MainWrapper.routeName, ModalRoute.withName("main_wrapper"),);
                             },
                           );
                         }else{

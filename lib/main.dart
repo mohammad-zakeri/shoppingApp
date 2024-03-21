@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping_app/feature_intro/presentation/screens/intro_main_wrapper.dart';
 import 'common/blocs/bottom_nav_cubit/bottom_nav_cubit.dart';
+import 'common/widgets/main_wrapper.dart';
 import 'config/my_theme.dart';
 import 'feature_splash/presentation/bloc/splash_cubit.dart';
 import 'feature_splash/presentation/screens/splash_screen.dart';
@@ -59,7 +60,7 @@ class MyApp extends StatelessWidget {
 
       routes: {
         IntroMainWrapper.routeName: (context)=> IntroMainWrapper(),
-        // MainWrapper.routeName: (context)=> MainWrapper(),
+        MainWrapper.routeName: (context)=> MainWrapper(),
         // MobileSignUpScreen.routeName: (context)=> MobileSignUpScreen(),
         // AllProductsScreen.routeName: (context)=> AllProductsScreen(),
       },

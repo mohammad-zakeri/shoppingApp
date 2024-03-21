@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -14,13 +13,16 @@ class SplashRepository {
     //   return false;
     // }
 
-    var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.mobile) {
+    var connectivityResult = await Connectivity().checkConnectivity();
+
+    if (connectivityResult.first == ConnectivityResult.mobile) {
       return true;
-    } else if (connectivityResult == ConnectivityResult.wifi) {
+    } else if (connectivityResult.first == ConnectivityResult.wifi) {
       return true;
     }else{
       return false;
     }
+
   }
+
 }
