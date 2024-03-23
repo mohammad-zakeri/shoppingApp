@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class Responsive extends StatelessWidget {
@@ -22,7 +21,9 @@ class Responsive extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     final Size size = MediaQuery.of(context).size;
+
     /// If our width is more than 1100 then we consider it a desktop
     if (size.width >= 1100 && desktop != null) {
       return desktop!;
@@ -35,6 +36,7 @@ class Responsive extends StatelessWidget {
     else {
       return mobile;
     }
+
   }
 
 }

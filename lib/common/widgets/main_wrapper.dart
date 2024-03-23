@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_app/feature_home/presentation/screens/home_screen.dart';
 import 'bottom_nav.dart';
 
 class MainWrapper extends StatelessWidget {
@@ -11,10 +12,9 @@ class MainWrapper extends StatelessWidget {
   PageController pageController = PageController();
 
   List<Widget> topLevelScreens = [
-    // HomeScreen(),
+    const HomeScreen(),
     // CategoryScreen(),
     // ProfileScreen(),
-    Container(color: Colors.green,),
     Container(color: Colors.blue,),
     Container(color: Colors.red,),
     Container(color: Colors.pink,),
