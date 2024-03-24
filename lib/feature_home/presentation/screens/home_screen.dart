@@ -22,15 +22,15 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  final pageViewController = PageController(initialPage: 0);
-  int _currentPage = 0;
   Timer? _timer;
+  int _currentPage = 0;
+  final pageViewController = PageController(initialPage: 0);
 
-  late bool _serviceEnabled;
-  late PermissionStatus _permissionGranted;
   var lat = 35.69611;
   var lon = 51.42306;
+  late bool _serviceEnabled;
   LocationData? _userLocation;
+  late PermissionStatus _permissionGranted;
 
   Future<void> getUserLocation(BuildContext context) async {
 
@@ -77,9 +77,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
 
-    /// get device size
-    var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
 
     return BlocProvider(
       create: (context) => HomeCubit(locator()),
@@ -141,33 +140,48 @@ class _HomeScreenState extends State<HomeScreen> {
                           ?
                       SizedBox(
                         height: Responsive.isMobile(context) ? 180 : 300,
+
                         child: PageView.builder(
+
                           onPageChanged: (page){
                             // _timer.
                           },
+
                           allowImplicitScrolling: true,
                           controller: pageViewController,
                           physics: const BouncingScrollPhysics(),
                           itemCount: homeModel.data!.sliders!.length,
+
                           itemBuilder: (context, index){
+
                             return Container(
-                              margin: const EdgeInsets.symmetric(horizontal: 8.0,),
+                              margin: const EdgeInsets.symmetric(horizontal: 8.0),
+
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
+
                                 child: CachedNetworkImage(
-                                  imageUrl: homeModel.data!.sliders![index].img!,
-                                  placeholder: (context, string){
-                                    return const Center(
-                                      child: DotLoadingWidget(size: 40,),
-                                    );
-                                  },
                                   fit: BoxFit.cover,
                                   useOldImageOnUrlChange: true,
+                                  imageUrl: homeModel.data!.sliders![index].img!,
+
+                                  placeholder: (context, string){
+
+                                    return const Center(
+                                      child: DotLoadingWidget(size: 40),
+                                    );
+
+                                  },
+
                                 ),
+
                               ),
+
                             );
+
                           },
                         ),
+
                       )
                           :
                       Container(),
@@ -180,8 +194,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       Center(
                         child: SmoothPageIndicator(
                           controller: pageViewController,  // PageController
-                          count:  homeModel.data!.sliders!.length,
-                          effect: ExpandingDotsEffect(dotWidth: width * 0.02,dotHeight: width * 0.02,spacing: 5,activeDotColor: Colors.redAccent),  // your preferred effect
+                          count: homeModel.data!.sliders!.length,
+                          effect: ExpandingDotsEffect(dotWidth: width * 0.02, dotHeight: width * 0.02, spacing: 5, activeDotColor: Colors.redAccent),  // your preferred effect
                         ),
                       )
                           :
@@ -192,21 +206,25 @@ class _HomeScreenState extends State<HomeScreen> {
                       /// category 8
                       SizedBox(
                         height: 220,
+
                         child: GridView.builder(
                           physics: const NeverScrollableScrollPhysics(),
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
 
+                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 4,
                             crossAxisSpacing: 0.0,
                             mainAxisSpacing: 8.0,
                           ),
+
                           itemCount: homeModel.data!.categories!.length,
                           // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           //   crossAxisCount: 4,
                           //   crossAxisSpacing: 4.0,
                           //   mainAxisSpacing: 4.0,
                           // ),
+
                           itemBuilder: (BuildContext context, int index){
+
                             final image = homeModel.data!.categories![index].img;
                             final categoryName = homeModel.data!.categories![index].title;
 
@@ -219,8 +237,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               // },
                               child: DeepLinks(image: image.toString(), title: categoryName.toString()),
                             );
+
                           },
+
                         ),
+
                       ),
 
                       SizedBox(height: height * 0.01),
@@ -228,10 +249,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       /// middle banners
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15.0),
+
                         child: Column(
                           children: [
+
                             (homeModel.data!.banners!.isNotEmpty)
-                                ? GestureDetector(
+                                ?
+                            GestureDetector(
+
                               onTap: (){
                                 // Navigator.pushNamed(context, SellerScreen.routeName);
                                 // if(homeModel.data!.banners![0].categoryId != null){
@@ -241,28 +266,39 @@ class _HomeScreenState extends State<HomeScreen> {
                                 //     arguments: ProductsArguments(categoryId: homeModel.data!.banners![0].categoryId!),);
                                 // }
                               },
+
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
+
                                 child: CachedNetworkImage(
-                                  imageUrl: homeModel.data!.banners![0].image!,
-                                  placeholder: (context, string){
-                                    return const Center(
-                                      child: DotLoadingWidget(size: 40,),
-                                    );
-                                  },
-                                  height: Responsive.isMobile(context) ? 120 : 320,
                                   width: width,
                                   fit: BoxFit.cover,
                                   useOldImageOnUrlChange: true,
+                                  imageUrl: homeModel.data!.banners![0].image!,
+                                  height: Responsive.isMobile(context) ? 120 : 320,
+
+                                  placeholder: (context, string){
+
+                                    return const Center(
+                                      child: DotLoadingWidget(size: 40),
+                                    );
+
+                                  },
+
                                 ),
+
                               ),
+
                             )
-                                : Container(),
+                                :
+                            Container(),
 
                             const SizedBox(height: 10),
 
                             (homeModel.data!.banners!.length > 1)
-                                ? GestureDetector(
+                                ?
+                            GestureDetector(
+
                               onTap: (){
                                 // if(homeModel.data!.banners![1].categoryId != null){
                                 //   Navigator.pushNamed(
@@ -271,25 +307,36 @@ class _HomeScreenState extends State<HomeScreen> {
                                 //     arguments: ProductsArguments(categoryId: homeModel.data!.banners![1].categoryId!),);
                                 // }
                               },
+
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
+
                                 child: CachedNetworkImage(
-                                  imageUrl: homeModel.data!.banners![1].image!,
-                                  placeholder: (context, string){
-                                    return const Center(
-                                      child: DotLoadingWidget(size: 40,),
-                                    );
-                                  },
-                                  height: Responsive.isMobile(context) ? 120 : 320,
                                   width: width,
                                   fit: BoxFit.cover,
                                   useOldImageOnUrlChange: true,
+                                  imageUrl: homeModel.data!.banners![1].image!,
+                                  height: Responsive.isMobile(context) ? 120 : 320,
+
+                                  placeholder: (context, string){
+
+                                    return const Center(
+                                      child: DotLoadingWidget(size: 40),
+                                    );
+
+                                  },
+
                                 ),
+
                               ),
+
                             )
-                                : Container(),
+                                :
+                            Container(),
+
                           ],
                         ),
+
                       ),
 
                       (homeModel.data!.banners!.isNotEmpty || homeModel.data!.banners!.length > 1)
@@ -303,116 +350,174 @@ class _HomeScreenState extends State<HomeScreen> {
                           ?
                       Column(
                         children: [
+
                           Container(
                             height: 330,
                             color: Colors.grey.shade200,
+
                             child: Column(
                               children: [
+
                                 Expanded(
+
                                   child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: discountProducts.items!.length,
-                                      itemBuilder: (context, index){
-                                        if(index == 0){
-                                          return Column(
-                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              SvgPicture.asset('assets/images/amazing.svg',width: 120, color: Colors.red,),
-                                              Image.asset('assets/images/box.png',width: 150,),
-                                            ],
-                                          );
-                                        }else{
-                                          return Padding(
-                                            padding: const EdgeInsets.symmetric(horizontal: 5.0,vertical: 10),
-                                            child: GestureDetector(
-                                              onTap: (){
-                                                // Navigator.pushNamed(
-                                                //   context,
-                                                //   ProductDetailScreen.routeName,
-                                                //   arguments: ProductDetailArguments(discountProducts.items![index - 1].id!),);
-                                              },
-                                              child: Container(
-                                                decoration: const BoxDecoration(
-                                                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                                                  color: Colors.white,
-                                                ),
-                                                width: 170,
-                                                child: Padding(
-                                                  padding: const EdgeInsets.symmetric(horizontal: 13.0),
-                                                  child: Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      SizedBox(height: height * 0.01,),
-                                                      const Text('شگفت انگیز اختصاصی اپ', style: TextStyle(fontFamily: 'Vazir',color: Colors.red, fontWeight: FontWeight.bold,fontSize: 12),),
-                                                      SizedBox(height: height * 0.01,),
-                                                      Expanded(
-                                                        child: Center(
-                                                          child: CachedNetworkImage(
-                                                            // imageUrl: "https://niyaz.shop/uploads/products/thum-%D9%85%D9%86%DA%AF%D9%88%D8%B3%D8%AA%DB%8C%D9%86-16630585025886737.png",
-                                                            imageUrl: discountProducts.items![index - 1].image!,
-                                                            fit: BoxFit.cover,
-                                                            useOldImageOnUrlChange: true,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      SizedBox(height: height * 0.01,),
-                                                      Text(discountProducts.items![index - 1].name!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 12),),
-                                                      SizedBox(height: height * 0.01,),
-                                                      const Text('موجود در بیسینیور', style: TextStyle(fontFamily: 'Vazir',color: Colors.grey, fontWeight: FontWeight.bold,fontSize: 11),),
-                                                      SizedBox(height: height * 0.03,),
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: discountProducts.items!.length,
 
-                                                      /// discount and price
-                                                      Row(
-                                                        children: [
+                                    itemBuilder: (context, index){
 
-                                                          /// discount red container
-                                                          (discountProducts.items![index - 1].discount! != 0)
-                                                              ? Container(
-                                                            width: 40,
-                                                            height: 30,
-                                                            decoration: BoxDecoration(
-                                                                color: Colors.red,
-                                                                borderRadius: BorderRadius.circular(20)
-                                                            ),
-                                                            child: Center(child: Text("${discountProducts.items![index - 1].discount!}%", style: const TextStyle(fontFamily: 'Vazir',color: Colors.white, fontWeight: FontWeight.bold,fontSize: 13),)),
-                                                          )
-                                                              : Container(),
+                                      if(index == 0){
 
-                                                          const Spacer(),
+                                        return Column(
+                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
-                                                          Row(
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                                            children: [
-                                                              Column(
-                                                                children: [
-                                                                  Text(discountProducts.items![index - 1].price!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 13),),
-                                                                  (discountProducts.items![index - 1].priceBeforDiscount != "0")
-                                                                      ? Text(discountProducts.items![index - 1].priceBeforDiscount!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 11,decoration: TextDecoration.lineThrough),)
-                                                                      : Container(),
-                                                                ],
-                                                              ),
-                                                              SizedBox(width: width * 0.01,),
-                                                              const Text('تومان', style: TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 10),),
-                                                            ],
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      SizedBox(height: height * 0.02,),
+                                          children: [
 
-                                                    ],
-                                                  ),
-                                                ),
+                                            SvgPicture.asset('assets/images/amazing.svg',width: 120, color: Colors.red),
+
+                                            Image.asset('assets/images/box.png',width: 150),
+
+                                          ],
+                                        );
+
+                                      }else{
+
+                                        return Padding(
+                                          padding: const EdgeInsets.symmetric(horizontal: 5.0,vertical: 10),
+
+                                          child: GestureDetector(
+
+                                            onTap: (){
+                                              // Navigator.pushNamed(
+                                              //   context,
+                                              //   ProductDetailScreen.routeName,
+                                              //   arguments: ProductDetailArguments(discountProducts.items![index - 1].id!),);
+                                            },
+
+                                            child: Container(
+                                              width: 170,
+
+                                              decoration: const BoxDecoration(
+                                                borderRadius: BorderRadius.all(Radius.circular(20)),
+                                                color: Colors.white,
                                               ),
+
+                                              child: Padding(
+                                                padding: const EdgeInsets.symmetric(horizontal: 13.0),
+
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+
+                                                  children: [
+
+                                                    SizedBox(height: height * 0.01),
+
+                                                    const Text('شگفت انگیز اختصاصی اپ', style: TextStyle(fontFamily: 'Vazir', color: Colors.red, fontWeight: FontWeight.bold, fontSize: 12)),
+
+                                                    SizedBox(height: height * 0.01),
+
+                                                    Expanded(
+
+                                                      child: Center(
+
+                                                        child: CachedNetworkImage(
+                                                          // imageUrl: "https://niyaz.shop/uploads/products/thum-%D9%85%D9%86%DA%AF%D9%88%D8%B3%D8%AA%DB%8C%D9%86-16630585025886737.png",
+                                                          imageUrl: discountProducts.items![index - 1].image!,
+                                                          fit: BoxFit.cover,
+                                                          useOldImageOnUrlChange: true,
+                                                        ),
+
+                                                      ),
+
+                                                    ),
+
+                                                    SizedBox(height: height * 0.01),
+
+                                                    Text(discountProducts.items![index - 1].name!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 12)),
+
+                                                    SizedBox(height: height * 0.01),
+
+                                                    const Text('موجود در بیسینیور', style: TextStyle(fontFamily: 'Vazir',color: Colors.grey, fontWeight: FontWeight.bold,fontSize: 11)),
+
+                                                    SizedBox(height: height * 0.03),
+
+                                                    /// discount and price
+                                                    Row(
+                                                      children: [
+
+                                                        /// discount red container
+                                                        (discountProducts.items![index - 1].discount! != 0)
+                                                            ?
+                                                        Container(
+                                                          width: 40,
+                                                          height: 30,
+                                                          decoration: BoxDecoration(
+                                                            color: Colors.red,
+                                                            borderRadius: BorderRadius.circular(20),
+                                                          ),
+
+                                                          child: Center(child: Text("${discountProducts.items![index - 1].discount!}%", style: const TextStyle(fontFamily: 'Vazir', color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13))),
+                                                        )
+                                                            :
+                                                        Container(),
+
+                                                        const Spacer(),
+
+                                                        Row(
+                                                          crossAxisAlignment: CrossAxisAlignment.start,
+
+                                                          children: [
+
+                                                            Column(
+                                                              children: [
+
+                                                                Text(discountProducts.items![index - 1].price!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 13)),
+
+                                                                (discountProducts.items![index - 1].priceBeforDiscount != "0")
+                                                                    ?
+                                                                Text(discountProducts.items![index - 1].priceBeforDiscount!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 11,decoration: TextDecoration.lineThrough))
+                                                                    :
+                                                                Container(),
+
+                                                              ],
+                                                            ),
+                                                            SizedBox(width: width * 0.01),
+
+                                                            const Text('تومان', style: TextStyle(fontFamily: 'Vazir', color: Colors.black, fontWeight: FontWeight.bold, fontSize: 10)),
+
+                                                          ],
+                                                        ),
+
+                                                      ],
+                                                    ),
+
+                                                    SizedBox(height: height * 0.02),
+
+                                                  ],
+                                                ),
+
+                                              ),
+
                                             ),
-                                          );
-                                        }
+
+                                          ),
+
+                                        );
+
                                       }
+
+                                      },
                                   ),
+
                                 ),
-                                SizedBox(height: height * 0.02,),
+
+                                SizedBox(height: height * 0.02),
+
                               ],
                             ),
+
                           ),
+
                         ],
                       )
                           :
@@ -423,10 +528,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       /// bottom banners
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15.0),
+
                         child: Column(
                           children: [
+
                             (homeModel.data!.banners!.length > 2)
-                                ? GestureDetector(
+                                ?
+                            GestureDetector(
+
                               onTap: (){
                                 // if(homeModel.data!.banners![2].categoryId != null){
                                 //   Navigator.pushNamed(
@@ -435,55 +544,80 @@ class _HomeScreenState extends State<HomeScreen> {
                                 //     arguments: ProductsArguments(categoryId: homeModel.data!.banners![2].categoryId!),);
                                 // }
                               },
+
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
+
                                 child: CachedNetworkImage(
-                                  imageUrl: homeModel.data!.banners![2].image!,
-                                  placeholder: (context, string){
-                                    return const Center(
-                                      child: DotLoadingWidget(size: 40,),
-                                    );
-                                  },
-                                  height: Responsive.isMobile(context) ? 120 : 320,
                                   width: width,
                                   fit: BoxFit.cover,
                                   useOldImageOnUrlChange: true,
-                                ),
-                              ),
-                            )
-                                : Container(),
+                                  imageUrl: homeModel.data!.banners![2].image!,
+                                  height: Responsive.isMobile(context) ? 120 : 320,
 
-                            SizedBox(height: height * 0.02,),
+                                  placeholder: (context, string){
+
+                                    return const Center(
+                                      child: DotLoadingWidget(size: 40),
+                                    );
+
+                                  },
+
+                                ),
+
+                              ),
+
+                            )
+                                :
+                            Container(),
+
+                            SizedBox(height: height * 0.02),
 
                             (homeModel.data!.banners!.length > 3)
-                                ? GestureDetector(
+                                ?
+                            GestureDetector(
+
                               onTap: (){
+
                                 if(homeModel.data!.banners![3].categoryId != null){
                                   // Navigator.pushNamed(
                                   //   context,
                                   //   AllProductsScreen.routeName,
                                   //   arguments: ProductsArguments(categoryId: homeModel.data!.banners![3].categoryId!),);
                                 }
+
                               },
+
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
+
                                 child: CachedNetworkImage(
-                                  imageUrl: homeModel.data!.banners![3].image!,
-                                  placeholder: (context, string){
-                                    return const Center(
-                                      child: DotLoadingWidget(size: 40,),
-                                    );
-                                  },
-                                  height: Responsive.isMobile(context) ? 120 : 320,
                                   width: width,
                                   fit: BoxFit.cover,
                                   useOldImageOnUrlChange: true,
+                                  imageUrl: homeModel.data!.banners![3].image!,
+                                  height: Responsive.isMobile(context) ? 120 : 320,
+
+                                  placeholder: (context, string){
+
+                                    return const Center(
+                                      child: DotLoadingWidget(size: 40),
+                                    );
+
+                                  },
+
                                 ),
+
                               ),
+
                             )
-                                : Container(),
+
+                                :
+                            Container(),
+
                           ],
                         ),
+
                       ),
 
                       (homeModel.data!.banners!.length > 2 || homeModel.data!.banners!.length > 3)
@@ -497,17 +631,24 @@ class _HomeScreenState extends State<HomeScreen> {
                           ?
                       Column(
                         children: [
+
                           Container(
                             height: 370,
                             color: Colors.grey.shade200,
+
                             child: Column(
                               children: [
+
                                 Padding(
                                   padding: const EdgeInsets.only(left: 15.0,right: 15, top: 10),
+
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                                     children: [
-                                      Text(organicProducts.title!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black,fontWeight: FontWeight.bold,fontSize: 17),),
+
+                                      Text(organicProducts.title!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black,fontWeight: FontWeight.bold,fontSize: 17)),
+
                                       // Row(
                                       //   children: const [
                                       //     Text('مشاهده همه', style: TextStyle(fontFamily: 'Vazir',color: Colors.white),),
@@ -515,121 +656,179 @@ class _HomeScreenState extends State<HomeScreen> {
                                       //     Icon(Icons.arrow_back_ios_new,color: Colors.white,size: 18,),
                                       //   ],
                                       // ),
+
                                     ],
                                   ),
+
                                 ),
+
                                 Expanded(
+
                                   child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
                                       itemCount: organicProducts.items!.length,
+
                                       itemBuilder: (context, index){
+
                                         return Padding(
                                           padding: const EdgeInsets.symmetric(horizontal: 5.0,vertical: 10),
+
                                           child: GestureDetector(
+
                                             onTap: (){
                                               // Navigator.pushNamed(
                                               //   context,
                                               //   ProductDetailScreen.routeName,
                                               //   arguments: ProductDetailArguments(organicProducts.items![index].id!),);
                                             },
+
                                             child: Container(
+                                              width: 170,
+
                                               decoration: const BoxDecoration(
                                                 borderRadius: BorderRadius.all(Radius.circular(20)),
                                                 color: Colors.white,
                                               ),
-                                              width: 170,
+
                                               child: Padding(
                                                 padding: const EdgeInsets.symmetric(horizontal: 13.0),
+
                                                 child: Column(
                                                   crossAxisAlignment: CrossAxisAlignment.start,
+
                                                   children: [
-                                                    SizedBox(height: height * 0.01,),
+
+                                                    SizedBox(height: height * 0.01),
+
                                                     Expanded(
+
                                                       child: Center(
+
                                                         child: CachedNetworkImage(
                                                           // imageUrl: "https://niyaz.shop/uploads/products/thum-%D9%BE%D8%B1%D8%AA%D9%82%D8%A7%D9%84-%D8%B1%D8%B3%D9%85%DB%8C-16630019485051793.png",
                                                           imageUrl: organicProducts.items![index].image!,
                                                           fit: BoxFit.cover,
                                                           useOldImageOnUrlChange: true,
                                                         ),
+
                                                       ),
+
                                                     ),
-                                                    SizedBox(height: height * 0.01,),
-                                                    Text(organicProducts.items![index].name!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 12),),
-                                                    SizedBox(height: height * 0.01,),
-                                                    const Text('موجود در انبار بیسینیور', style: TextStyle(fontFamily: 'Vazir',color: Colors.grey, fontWeight: FontWeight.bold,fontSize: 11),),
-                                                    SizedBox(height: height * 0.03,),
+
+                                                    SizedBox(height: height * 0.01),
+
+                                                    Text(organicProducts.items![index].name!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 12)),
+
+                                                    SizedBox(height: height * 0.01),
+
+                                                    const Text('موجود در انبار بیسینیور', style: TextStyle(fontFamily: 'Vazir',color: Colors.grey, fontWeight: FontWeight.bold,fontSize: 11)),
+
+                                                    SizedBox(height: height * 0.03),
 
                                                     Row(
                                                       children: [
+
                                                         /// discount red container
                                                         (organicProducts.items![index].discount! != 0)
-                                                            ? Container(
+                                                            ?
+                                                        Container(
                                                           width: 40,
                                                           height: 30,
+
                                                           decoration: BoxDecoration(
-                                                              color: Colors.red,
-                                                              borderRadius: BorderRadius.circular(20)
+                                                            color: Colors.red,
+                                                            borderRadius: BorderRadius.circular(20),
                                                           ),
-                                                          child: Center(child: Text("${organicProducts.items![index].discount!}%", style: const TextStyle(fontFamily: 'Vazir',color: Colors.white, fontWeight: FontWeight.bold,fontSize: 13),)),
+
+                                                          child: Center(child: Text("${organicProducts.items![index].discount!}%", style: const TextStyle(fontFamily: 'Vazir',color: Colors.white, fontWeight: FontWeight.bold,fontSize: 13))),
                                                         )
-                                                            : Container(),
+                                                            :
+                                                        Container(),
 
                                                         const Spacer(),
 
                                                         Row(
                                                           crossAxisAlignment: CrossAxisAlignment.start,
+
                                                           children: [
+
                                                             Column(
                                                               children: [
-                                                                Text(organicProducts.items![index].price!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 13),),
+
+                                                                Text(organicProducts.items![index].price!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 13)),
+
                                                                 (organicProducts.items![index].priceBeforDiscount != "0")
-                                                                    ? Text(organicProducts.items![index].priceBeforDiscount!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 11,decoration: TextDecoration.lineThrough),)
-                                                                    : Container(),
+                                                                    ?
+                                                                Text(organicProducts.items![index].priceBeforDiscount!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 11,decoration: TextDecoration.lineThrough))
+                                                                    :
+                                                                Container(),
 
                                                               ],
                                                             ),
-                                                            SizedBox(width: width * 0.01,),
-                                                            const Text('تومان', style: TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 10),),
+
+                                                            SizedBox(width: width * 0.01),
+
+                                                            const Text('تومان', style: TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 10)),
+
                                                           ],
                                                         ),
+
                                                       ],
                                                     ),
-                                                    SizedBox(height: height * 0.03,),
+
+                                                    SizedBox(height: height * 0.03),
 
                                                     /// stars icon
                                                     Center(
+
                                                       child: RatingBar.builder(
                                                         itemSize: 20,
                                                         initialRating: organicProducts.items![index].star!.toDouble(),
                                                         direction: Axis.horizontal,
                                                         allowHalfRating: true,
                                                         itemCount: 5,
+
                                                         itemBuilder: (context, _){
+
                                                           return const Icon(
                                                             Icons.star,
                                                             color: Colors.amber,
                                                             size: 10,
                                                           );
+
                                                         },
+
                                                         onRatingUpdate: (rating) {
                                                           print(rating);
                                                         },
+
                                                       ),
+
                                                     ),
-                                                    SizedBox(height: height * 0.02,),
+
+                                                    SizedBox(height: height * 0.02),
+
                                                   ],
                                                 ),
+
                                               ),
+
                                             ),
+
                                           ),
+
                                         );
+
                                       }
                                   ),
+
                                 ),
+
                               ],
                             ),
+
                           ),
+
                         ],
                       )
                           :
@@ -640,17 +839,24 @@ class _HomeScreenState extends State<HomeScreen> {
                           ?
                       Column(
                         children: [
+
                           Container(
                             height: 370,
                             color: Colors.grey.shade200,
+
                             child: Column(
                               children: [
+
                                 Padding(
                                   padding: const EdgeInsets.only(left: 15.0,right: 15, top: 15),
+
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                                     children: [
-                                      Text(thirdProductsList.title ?? 'محصولات', style: const TextStyle(fontFamily: 'Vazir',color: Colors.black,fontWeight: FontWeight.bold,fontSize: 17),),
+
+                                      Text(thirdProductsList.title ?? 'محصولات', style: const TextStyle(fontFamily: 'Vazir',color: Colors.black,fontWeight: FontWeight.bold,fontSize: 17)),
+
                                       // Row(
                                       //   children: const [
                                       //     Text('مشاهده همه', style: TextStyle(fontFamily: 'Vazir',color: Colors.white),),
@@ -658,95 +864,137 @@ class _HomeScreenState extends State<HomeScreen> {
                                       //     Icon(Icons.arrow_back_ios_new,color: Colors.white,size: 18,),
                                       //   ],
                                       // ),
+
                                     ],
                                   ),
+
                                 ),
+
                                 Expanded(
+
                                   child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: thirdProductsList.items!.length,
-                                      itemBuilder: (context, index){
-                                        return Padding(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: thirdProductsList.items!.length,
+
+                                    itemBuilder: (context, index){
+
+                                      return Padding(
                                           padding: const EdgeInsets.symmetric(horizontal: 5.0,vertical: 10),
+
                                           child: GestureDetector(
+
                                             onTap: (){
                                               // Navigator.pushNamed(
                                               //   context,
                                               //   ProductDetailScreen.routeName,
                                               //   arguments: ProductDetailArguments(thirdProductsList.items![index].id!),);
                                             },
+
                                             child: Container(
+                                              width: 170,
+
                                               decoration: const BoxDecoration(
                                                 borderRadius: BorderRadius.all(Radius.circular(20)),
                                                 color: Colors.white,
                                               ),
-                                              width: 170,
+
                                               child: Padding(
                                                 padding: const EdgeInsets.symmetric(horizontal: 13.0),
+
                                                 child: Column(
                                                   crossAxisAlignment: CrossAxisAlignment.start,
+
                                                   children: [
-                                                    SizedBox(height: height * 0.01,),
+
+                                                    SizedBox(height: height * 0.01),
+
                                                     Expanded(
+
                                                       child: Center(
+
                                                         child: CachedNetworkImage(
                                                           imageUrl: thirdProductsList.items![index].image!,
                                                           fit: BoxFit.cover,
                                                           useOldImageOnUrlChange: true,
                                                         ),
+
                                                       ),
+
                                                     ),
-                                                    SizedBox(height: height * 0.01,),
-                                                    Text(thirdProductsList.items![index].name!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 12),),
-                                                    SizedBox(height: height * 0.01,),
-                                                    const Text('موجود در انبار بیسینیور', style: TextStyle(fontFamily: 'Vazir',color: Colors.grey, fontWeight: FontWeight.bold,fontSize: 11),),
-                                                    SizedBox(height: height * 0.03,),
+
+                                                    SizedBox(height: height * 0.01),
+
+                                                    Text(thirdProductsList.items![index].name!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 12)),
+
+                                                    SizedBox(height: height * 0.01),
+
+                                                    const Text('موجود در انبار بیسینیور', style: TextStyle(fontFamily: 'Vazir',color: Colors.grey, fontWeight: FontWeight.bold,fontSize: 11)),
+
+                                                    SizedBox(height: height * 0.03),
 
                                                     Row(
                                                       children: [
+
                                                         /// discount red container
                                                         (thirdProductsList.items![index].discount! != 0)
-                                                            ? Container(
+                                                            ?
+                                                        Container(
                                                           width: 40,
                                                           height: 30,
+
                                                           decoration: BoxDecoration(
-                                                              color: Colors.red,
-                                                              borderRadius: BorderRadius.circular(20)
+                                                            color: Colors.red,
+                                                            borderRadius: BorderRadius.circular(20),
                                                           ),
-                                                          child: Center(child: Text("${thirdProductsList.items![index].discount!}%", style: const TextStyle(fontFamily: 'Vazir',color: Colors.white, fontWeight: FontWeight.bold,fontSize: 13),)),
+
+                                                          child: Center(child: Text("${thirdProductsList.items![index].discount!}%", style: const TextStyle(fontFamily: 'Vazir',color: Colors.white, fontWeight: FontWeight.bold,fontSize: 13))),
                                                         )
-                                                            : Container(),
+                                                            :
+                                                        Container(),
 
                                                         const Spacer(),
 
                                                         Row(
                                                           crossAxisAlignment: CrossAxisAlignment.start,
+
                                                           children: [
+
                                                             Column(
                                                               children: [
-                                                                Text(thirdProductsList.items![index].price!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 13),),
+
+                                                                Text(thirdProductsList.items![index].price!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 13)),
+
                                                                 (thirdProductsList.items![index].priceBeforDiscount != "0")
-                                                                    ? Text(thirdProductsList.items![index].priceBeforDiscount!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 11,decoration: TextDecoration.lineThrough),)
-                                                                    : Container(),
+                                                                    ?
+                                                                Text(thirdProductsList.items![index].priceBeforDiscount!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 11,decoration: TextDecoration.lineThrough))
+                                                                    :
+                                                                Container(),
 
                                                               ],
                                                             ),
-                                                            SizedBox(width: width * 0.01,),
-                                                            const Text('تومان', style: TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 10),),
+
+                                                            SizedBox(width: width * 0.01),
+
+                                                            const Text('تومان', style: TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 10)),
+
                                                           ],
                                                         ),
+
                                                       ],
                                                     ),
-                                                    SizedBox(height: height * 0.03,),
+
+                                                    SizedBox(height: height * 0.03),
 
                                                     /// stars icon
                                                     Center(
+
                                                       child: RatingBar.builder(
                                                         itemSize: 20,
                                                         initialRating: thirdProductsList.items![index].star!.toDouble(),
                                                         direction: Axis.horizontal,
                                                         allowHalfRating: true,
                                                         itemCount: 5,
+
                                                         itemBuilder: (context, _){
                                                           return const Icon(
                                                             Icons.star,
@@ -754,29 +1002,43 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             size: 10,
                                                           );
                                                         },
+
                                                         onRatingUpdate: (rating) {
                                                           print(rating);
                                                         },
+
                                                       ),
+
                                                     ),
-                                                    SizedBox(height: height * 0.02,),
+
+                                                    SizedBox(height: height * 0.02),
+
                                                   ],
                                                 ),
+
                                               ),
+
                                             ),
+
                                           ),
+
                                         );
-                                      }
+
+                                      },
+
                                   ),
+
                                 ),
+
                               ],
                             ),
+
                           ),
+
                         ],
                       )
                           :
                       Container(),
-                      // SizedBox(height: height * 0.2,),
 
                     ],
                   ),
@@ -790,21 +1052,32 @@ class _HomeScreenState extends State<HomeScreen> {
                 final HomeDataError homeDataError = state.homeDataStatus as HomeDataError;
 
                 return Center(
+
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
+
                     children:  [
-                      Text(homeDataError.errorMessage,style: const TextStyle(color: Colors.white),),
-                      const SizedBox(height: 10,),
+
+                      Text(homeDataError.errorMessage,style: const TextStyle(color: Colors.white)),
+
+                      const SizedBox(height: 10),
+
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(primary: Colors.amber.shade800),
+
                         onPressed: (){
                           /// call all data again
                           BlocProvider.of<HomeCubit>(context).callHomeDataEvent(lat, lon);
                         },
-                        child: const Text("تلاش دوباره"),)
+
+                        child: const Text("تلاش دوباره"),
+                      ),
+
                     ],
                   ),
+
                 );
+
               }
 
               return Container();

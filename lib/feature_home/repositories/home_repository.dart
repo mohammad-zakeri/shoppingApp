@@ -6,10 +6,12 @@ import 'package:shopping_app/feature_home/data/models/home_model.dart';
 import '../../../common/resources/data_state.dart';
 
 class HomeRepository {
-  HomeApiProvider apiProvider;
   HomeRepository(this.apiProvider);
 
+  HomeApiProvider apiProvider;
+
   Future<DataState<HomeModel>> fetchHomeData(lat, lon) async {
+
     try{
       Response response = await apiProvider.callHomeData(lat, lon);
       final HomeModel homeModel = HomeModel.fromJson(response.data);
@@ -17,6 +19,7 @@ class HomeRepository {
     } on AppException catch(e){
       return await CheckExceptions.getError(e);
     }
+
   }
 
 }
