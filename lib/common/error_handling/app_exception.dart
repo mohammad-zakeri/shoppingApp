@@ -4,7 +4,7 @@ class AppException implements Exception {
   final message;
   Response? response;
 
-  AppException({required this.message,this.response});
+  AppException({required this.message, this.response});
 
   String getMessage() {
     return "$message";
@@ -24,7 +24,7 @@ class DataParsingException extends AppException {
 }
 
 class BadRequestException extends AppException {
-  BadRequestException({String? message,Response? response}) : super(message: message ?? "bad request exception.",response: response);
+  BadRequestException({String? message, Response? response}) : super(message: message ?? "bad request exception.", response: response);
 }
 
 class FetchDataException extends AppException {

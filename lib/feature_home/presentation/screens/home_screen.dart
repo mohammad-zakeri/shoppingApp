@@ -36,17 +36,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
     Location location = Location();
 
-    // Check if location service is enable
+    /// Check if location service is enable
     _serviceEnabled = await location.serviceEnabled();
     if (!_serviceEnabled) {
       _serviceEnabled = await location.requestService();
       if (!_serviceEnabled) {
+        /// call api with default lat lon
         BlocProvider.of<HomeCubit>(context).callHomeDataEvent(lat, lon);
         return;
       }
     }
 
-    // Check if permission is granted
+    /// Check if permission is granted
     _permissionGranted = await location.hasPermission();
     if (_permissionGranted == PermissionStatus.denied) {
       _permissionGranted = await location.requestPermission();

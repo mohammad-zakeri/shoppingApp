@@ -9,11 +9,14 @@ class ProfileListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return ListTile(
       onTap: onTap,
       title: Text(title, style: TextStyle(color: (isLast) ? Colors.red : Colors.grey.shade700,fontWeight: FontWeight.bold,fontSize: 14)),
       leading: Icon(iconData, color: (isLast) ? Colors.red : Colors.grey.shade700),
       trailing: Icon(Icons.arrow_right, color: (isLast) ? Colors.red : Colors.grey.shade700),
     );
+
   }
+
 }
