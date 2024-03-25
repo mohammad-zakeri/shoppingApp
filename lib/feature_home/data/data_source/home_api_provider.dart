@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:shopping_app/config/constants.dart';
+import '../../../common/error_handling/check_exceptions.dart';
 
 class HomeApiProvider {
   HomeApiProvider(this.dio);
@@ -12,20 +13,12 @@ class HomeApiProvider {
     final response = await dio.get(
       "${Constants.baseUrl}/mainData",
       queryParameters: {
-        "lat" : lat,
-        "long" : lon,
-      },
-    );
-
-    // final response = await dio.get(
-    //   "${Constants.baseUrl}/mainData",
-    //   queryParameters: {
-    //     "lat" : lat,
-    //     "long" : lon,
-    //   }
-    // ).onError((DioError error, stackTrace){
-    //   return CheckExceptions.response(error.response!);
-    // });
+        "lat": lat,
+        "long": lon,
+      }
+    ).onError((DioError error, stackTrace){
+      return CheckExceptions.response(error.response!);
+    });
 
     log(response.toString());
 

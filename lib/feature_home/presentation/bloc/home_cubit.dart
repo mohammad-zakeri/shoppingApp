@@ -13,6 +13,7 @@ class HomeCubit extends Cubit<HomeState> {
   HomeRepository homeRepository;
 
   Future<void> callHomeDataEvent(lat, lon) async {
+
     emit(state.copyWith(newHomeDataStatus: HomeDataLoading()));
 
     DataState dataState = await homeRepository.fetchHomeData(lat, lon);

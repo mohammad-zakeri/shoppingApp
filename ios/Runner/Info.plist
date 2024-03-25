@@ -45,5 +45,11 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+
+	<key>NSLocationAlwaysUsageDescription</key>
+    <string>we need user location for set his ecommerce</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>we need user location for set his ecommerce</string>
+
 </dict>
 </plist>
