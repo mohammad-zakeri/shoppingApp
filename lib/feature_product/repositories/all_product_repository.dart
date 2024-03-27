@@ -11,15 +11,15 @@ class AllProductsRepository {
   AllProductsRepository(this.apiProvider);
 
   Future<dynamic> fetchAllProductsData(ProductsParams productsParams) async {
+
     try{
-      // convert json to models class
       Response response = await apiProvider.callAllProducts(productsParams);
       final AllProductsModel allProductsModel = AllProductsModel.fromJson(response.data);
       return DataSuccess(allProductsModel);
     } on AppException catch(e){
-      print(e);
       return CheckExceptions.getError(e);
     }
+
   }
 
   Future<List<Products>> fetchAllProductsDataSearch(ProductsParams productsParams) async {
@@ -27,4 +27,5 @@ class AllProductsRepository {
     final AllProductsModel allProductsModel = AllProductsModel.fromJson(response.data);
     return allProductsModel.data![0].products!;
   }
+
 }
