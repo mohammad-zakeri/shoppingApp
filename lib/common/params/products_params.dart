@@ -8,5 +8,5 @@ class ProductsParams {
   String? sortBy;
   String? search;
 
-  ProductsParams({this.start = 0, this.step = 10, this.categories, this.maxPrice, this.minPrice, this.sortBy = "date",this.search});
+  ProductsParams({this.start = 0, this.step = 10, this.categories, this.maxPrice, this.minPrice, this.sortBy = "date", this.search});
 }
