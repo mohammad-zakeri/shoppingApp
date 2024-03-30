@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:shopping_app/feature_product/data/models/categories_model.dart';
+import 'package:shopping_app/feature/feature_product/data/models/categories_model.dart';
 import '../../../common/error_handling/app_exception.dart';
 import '../../../common/error_handling/check_exceptions.dart';
 import '../../../common/resources/data_state.dart';

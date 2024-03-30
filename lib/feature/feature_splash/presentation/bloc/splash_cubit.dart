@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:shopping_app/feature_splash/repositories/splash_repository.dart';
+import 'package:shopping_app/feature/feature_splash/repositories/splash_repository.dart';
 
 part 'splash_state.dart';
 part 'connection_status.dart';

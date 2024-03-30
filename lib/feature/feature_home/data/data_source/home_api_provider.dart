@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:shopping_app/config/constants.dart';
-import '../../../common/error_handling/check_exceptions.dart';
+import '../../../../common/error_handling/check_exceptions.dart';
 
 class HomeApiProvider {
   HomeApiProvider(this.dio);

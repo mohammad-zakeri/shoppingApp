@@ -4,12 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shopping_app/common/utils/prefs_operator.dart';
 import 'package:shopping_app/common/widgets/main_wrapper.dart';
-import 'package:shopping_app/feature_intro/presentation/screens/intro_main_wrapper.dart';
-import 'package:shopping_app/feature_splash/presentation/bloc/splash_cubit.dart';
+import 'package:shopping_app/feature/feature_intro/presentation/screens/intro_main_wrapper.dart';
+import 'package:shopping_app/feature/feature_splash/presentation/bloc/splash_cubit.dart';
 import 'package:shopping_app/locator.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({super.key});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
