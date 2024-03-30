@@ -2,12 +2,12 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'common/utils/prefs_operator.dart';
-import 'feature_home/data/data_source/home_api_provider.dart';
-import 'feature_home/repositories/home_repository.dart';
-import 'feature_product/data/data_source/category_api_provider.dart';
-import 'feature_product/data/data_source/product_api_provider.dart';
-import 'feature_product/repositories/all_product_repository.dart';
-import 'feature_product/repositories/category_repository.dart';
+import 'feature/feature_home/data/data_source/home_api_provider.dart';
+import 'feature/feature_home/repositories/home_repository.dart';
+import 'feature/feature_product/data/data_source/category_api_provider.dart';
+import 'feature/feature_product/data/data_source/product_api_provider.dart';
+import 'feature/feature_product/repositories/all_product_repository.dart';
+import 'feature/feature_product/repositories/category_repository.dart';
 
 GetIt locator = GetIt.instance;
 

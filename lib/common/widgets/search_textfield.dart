@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:shopping_app/common/blocs/search_box_cubit.dart';
-import 'package:shopping_app/feature_product/data/models/all_products_model.dart';
-import 'package:shopping_app/feature_product/repositories/all_product_repository.dart';
+import 'package:shopping_app/feature/feature_product/data/models/all_products_model.dart';
+import 'package:shopping_app/feature/feature_product/repositories/all_product_repository.dart';
 import '../../../../common/params/products_params.dart';
 
 class SearchTextField extends StatelessWidget {

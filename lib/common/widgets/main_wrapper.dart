@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_app/common/widgets/search_textfield.dart';
-import 'package:shopping_app/feature_home/presentation/screens/home_screen.dart';
-import 'package:shopping_app/feature_home/presentation/screens/profile_screen.dart';
-import 'package:shopping_app/feature_product/presentation/screens/category_screen.dart';
-import 'package:shopping_app/feature_product/repositories/all_product_repository.dart';
+import 'package:shopping_app/feature/feature_home/presentation/screens/home_screen.dart';
+import 'package:shopping_app/feature/feature_home/presentation/screens/profile_screen.dart';
+import 'package:shopping_app/feature/feature_product/presentation/screens/category_screen.dart';
+import 'package:shopping_app/feature/feature_product/repositories/all_product_repository.dart';
 import 'package:shopping_app/locator.dart';
 import 'bottom_nav.dart';
 
