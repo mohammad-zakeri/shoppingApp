@@ -4,6 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'common/blocs/bottom_nav_cubit/bottom_nav_cubit.dart';
 import 'common/widgets/main_wrapper.dart';
 import 'config/my_theme.dart';
+import 'feature/feature_auth/presentation/bloc/login_bloc/login_bloc.dart';
+import 'feature/feature_auth/presentation/bloc/signup_bloc/signup_bloc.dart';
+import 'feature/feature_auth/presentation/screens/mobile_signup_screen.dart';
 import 'feature/feature_intro/presentation/screens/intro_main_wrapper.dart';
 import 'feature/feature_splash/presentation/bloc/splash_cubit.dart';
 import 'feature/feature_splash/presentation/screens/splash_screen.dart';
@@ -22,8 +25,8 @@ Future<void> main() async {
       providers: [
         BlocProvider(create: (_)=> SplashCubit()),
         BlocProvider(create: (_)=> BottomNavCubit()),
-        // BlocProvider(create: (_) => locator<SignupBloc>()),
-        // BlocProvider(create: (_) => locator<LoginBloc>()),
+        BlocProvider(create: (_) => locator<SignupBloc>()),
+        BlocProvider(create: (_) => locator<LoginBloc>()),
       ],
       child: const MyApp(),
     ),
@@ -61,7 +64,7 @@ class MyApp extends StatelessWidget {
       routes: {
         IntroMainWrapper.routeName: (context)=> IntroMainWrapper(),
         MainWrapper.routeName: (context)=> MainWrapper(),
-        // MobileSignUpScreen.routeName: (context)=> MobileSignUpScreen(),
+        MobileSignUpScreen.routeName: (context)=> const MobileSignUpScreen(),
         // AllProductsScreen.routeName: (context)=> AllProductsScreen(),
       },
 

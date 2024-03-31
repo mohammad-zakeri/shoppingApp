@@ -2,6 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'common/utils/prefs_operator.dart';
+import 'feature/feature_auth/data/data_source/auth_api_provider.dart';
+import 'feature/feature_auth/presentation/bloc/login_bloc/login_bloc.dart';
+import 'feature/feature_auth/presentation/bloc/signup_bloc/signup_bloc.dart';
+import 'feature/feature_auth/repositories/auth_repository.dart';
 import 'feature/feature_home/data/data_source/home_api_provider.dart';
 import 'feature/feature_home/repositories/home_repository.dart';
 import 'feature/feature_product/data/data_source/category_api_provider.dart';
@@ -23,16 +27,16 @@ Future<void> initLocator() async{
   locator.registerSingleton<HomeApiProvider>(HomeApiProvider(locator()));
   locator.registerSingleton<CategoryApiProvider>(CategoryApiProvider(locator()));
   locator.registerSingleton<ProductsApiProvider>(ProductsApiProvider(locator()));
-  // locator.registerSingleton<AuthApiProvider>(AuthApiProvider(locator<Dio>()));
+  locator.registerSingleton<AuthApiProvider>(AuthApiProvider(locator<Dio>()));
 
   /// repository
   locator.registerSingleton<HomeRepository>(HomeRepository(locator()));
   locator.registerSingleton<CategoryRepository>(CategoryRepository(locator()));
   locator.registerSingleton<AllProductsRepository>(AllProductsRepository(locator()));
-  // locator.registerSingleton<AuthRepository>(AuthRepository(locator<AuthApiProvider>()));
+  locator.registerSingleton<AuthRepository>(AuthRepository(locator<AuthApiProvider>()));
 
   /// bloc
-  // locator.registerSingleton<SignupBloc>(SignupBloc(locator<AuthRepository>()));
-  // locator.registerSingleton<LoginBloc>(LoginBloc(locator<AuthRepository>()));
+  locator.registerSingleton<SignupBloc>(SignupBloc(locator<AuthRepository>()));
+  locator.registerSingleton<LoginBloc>(LoginBloc(locator<AuthRepository>()));
 
 }
