@@ -108,7 +108,7 @@ class SearchTextField extends StatelessWidget {
 
                     itemBuilder: (context, Products model){
                       return ListTile(
-                        title: Text(model.name!,style: const TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.w400),),
+                        title: Text(model.name!,style: const TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.w400)),
                       );
                     },
 

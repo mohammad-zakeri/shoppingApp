@@ -1,14 +1,15 @@
 import 'package:dio/dio.dart';
 
 class AppException implements Exception {
+  AppException({required this.message, this.response});
+
   final message;
   Response? response;
-
-  AppException({required this.message, this.response});
 
   String getMessage() {
     return "$message";
   }
+
 }
 
 class ServerException extends AppException {
