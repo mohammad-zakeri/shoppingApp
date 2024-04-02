@@ -51,8 +51,10 @@ class MainWrapper extends StatelessWidget {
 
               child: Padding(
                 padding: const EdgeInsets.only(left: 10.0,right: 10, bottom: 10),
+
                 child: SearchTextField(controller: searchController, allProductsRepository: locator<AllProductsRepository>()),
               ),
+
             ),
 
             const SizedBox(height: 10),

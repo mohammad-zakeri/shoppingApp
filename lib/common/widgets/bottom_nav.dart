@@ -8,7 +8,7 @@ import '../blocs/bottom_nav_cubit/bottom_nav_cubit.dart';
 class BottomNav extends StatelessWidget {
   final PageController controller;
 
-  const BottomNav({Key? key, required this.controller}) : super(key: key);
+  const BottomNav({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -167,9 +167,7 @@ class BottomNav extends StatelessWidget {
 
   }
 
-
   Future<bool> getDataFromPrefs() async {
-    // Obtain shared preferences.
     final prefs = await SharedPreferences.getInstance();
     final bool loggedIn = prefs.getBool('user_loggedIn') ?? false;
 
