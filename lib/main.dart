@@ -22,15 +22,19 @@ Future<void> main() async {
   await initLocator();
 
   runApp(
+
     MultiBlocProvider(
+
       providers: [
         BlocProvider(create: (_)=> SplashCubit()),
         BlocProvider(create: (_)=> BottomNavCubit()),
         BlocProvider(create: (_) => locator<SignupBloc>()),
         BlocProvider(create: (_) => locator<LoginBloc>()),
       ],
+
       child: const MyApp(),
     ),
+
   );
 
 }
