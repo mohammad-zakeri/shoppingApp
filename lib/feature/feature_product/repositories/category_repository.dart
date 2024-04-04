@@ -10,6 +10,7 @@ class CategoryRepository {
   CategoryRepository(this.apiProvider);
 
   Future<DataState<CategoriesModel>> fetchCategoryData() async {
+
     try{
       Response response = await apiProvider.callCategories();
       final CategoriesModel categoriesModel = CategoriesModel.fromJson(response.data);
@@ -17,5 +18,7 @@ class CategoryRepository {
     } on AppException catch(e){
       return await CheckExceptions.getError(e);
     }
+
   }
+
 }

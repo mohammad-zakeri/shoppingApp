@@ -8,6 +8,7 @@ import 'feature/feature_auth/presentation/bloc/login_bloc/login_bloc.dart';
 import 'feature/feature_auth/presentation/bloc/signup_bloc/signup_bloc.dart';
 import 'feature/feature_auth/presentation/screens/mobile_signup_screen.dart';
 import 'feature/feature_intro/presentation/screens/intro_main_wrapper.dart';
+import 'feature/feature_product/presentation/screens/all_products_screen.dart';
 import 'feature/feature_splash/presentation/bloc/splash_cubit.dart';
 import 'feature/feature_splash/presentation/screens/splash_screen.dart';
 import 'locator.dart';
@@ -71,7 +72,7 @@ class MyApp extends StatelessWidget {
         IntroMainWrapper.routeName: (context)=> IntroMainWrapper(),
         MainWrapper.routeName: (context)=> MainWrapper(),
         MobileSignUpScreen.routeName: (context)=> const MobileSignUpScreen(),
-        // AllProductsScreen.routeName: (context)=> AllProductsScreen(),
+        AllProductsScreen.routeName: (context)=> const AllProductsScreen(),
       },
 
       home: const SplashScreen(),

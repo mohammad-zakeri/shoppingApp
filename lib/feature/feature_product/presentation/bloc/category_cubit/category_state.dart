@@ -5,12 +5,9 @@ class CategoryState {
 
   CategoryState({required this.categoryDataStatus});
 
-  CategoryState copyWith({
-    CategoryDataStatus? newCategoryDataStatus,
-  }){
-    return CategoryState(
-        categoryDataStatus: newCategoryDataStatus ?? categoryDataStatus
-    );
+  CategoryState copyWith({CategoryDataStatus? newCategoryDataStatus}){
+    return CategoryState(categoryDataStatus: newCategoryDataStatus ?? categoryDataStatus);
   }
+
 }
 
