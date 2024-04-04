@@ -1,11 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
 import '../../../../../common/widgets/dot_loading_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:delayed_widget/delayed_widget.dart';
-
 import '../../../../common/params/products_params.dart';
 import '../../../../common/widgets/paging_loading_widget.dart';
 import '../../data/models/all_products_model.dart';
@@ -15,7 +13,7 @@ class ProductsGrid extends StatelessWidget {
   final int? categoryId;
   final int? sellerId;
   final String? searchText;
-  ProductsGrid({Key? key, this.categoryId, this.sellerId, this.searchText}) : super(key: key);
+  ProductsGrid({super.key, this.categoryId, this.sellerId, this.searchText});
 
   final ScrollController scrollController = ScrollController();
 
@@ -23,6 +21,7 @@ class ProductsGrid extends StatelessWidget {
   Widget build(BuildContext context) {
 
     setupScrollController(context);
+
     /// call api for data
     BlocProvider.of<AllProductsCubit>(context).loadProductsData(ProductsParams(categories: categoryId,search: searchText ?? ""));
 
@@ -39,57 +38,72 @@ class ProductsGrid extends StatelessWidget {
           List<Products> allProducts = state.allProducts;
 
           return RefreshIndicator(
+
             onRefresh: () async {
               // BlocProvider.of<AllProductsCubit>(context).add(ResetNextStartEvent());
               BlocProvider.of<AllProductsCubit>(context).loadProductsData(ProductsParams(categories: categoryId,search: searchText ?? ""));
             },
+
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
+
               child: Column(
                 children: [
-                  const SizedBox(height: 10,),
+
+                  const SizedBox(height: 10),
+
                   /// filter btn
                   SizedBox(
                     height: 60,
                     width: double.infinity,
+
                     child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            elevation: 3,
-                            shadowColor: Colors.redAccent,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)
-                            )
-                        ),
-                        onPressed: (){
-                          // showFilterBottomSheet(context);
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Text('فیلتر', style: TextStyle(fontFamily: 'Vazir', color: Colors.black),),
-                            Icon(Icons.filter_list_alt,color: Colors.black),
-                          ],
-                        )
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        elevation: 3,
+                        shadowColor: Colors.redAccent,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      ),
+                      onPressed: (){
+                        // showFilterBottomSheet(context);
+                      },
+
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+
+                        children: [
+
+                          Text('فیلتر', style: TextStyle(fontFamily: 'Vazir', color: Colors.black)),
+
+                          Icon(Icons.filter_list_alt, color: Colors.black),
+
+                        ],
+                      ),
+
                     ),
+
                   ),
 
                   const SizedBox(height: 10),
 
                   /// all product gridview or no products for show
                   (allProducts.isNotEmpty)
-                  ? Expanded(
+                      ?
+                  Expanded(
+
                     child: GridView.builder(
                       controller: scrollController,
                       padding: const EdgeInsets.only(top: 10),
                       itemCount: allProducts.length,
                       // itemCount: allProductsModel.data![0].products!.length,
+
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 8.0,
-                          mainAxisSpacing: 8.0,
-                          childAspectRatio: 0.65
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 8.0,
+                        mainAxisSpacing: 8.0,
+                        childAspectRatio: 0.65,
                       ),
+
                       itemBuilder: (BuildContext context, int index){
                         final productImage = allProducts[index].image;
                         final productName = allProducts[index].name;
@@ -99,31 +113,34 @@ class ProductsGrid extends StatelessWidget {
                         final productPriceBeforeDiscount = allProducts[index].priceBeforDiscount;
 
                         return GestureDetector(
+
                           onTap: (){
                             /// goto All products screen
                             // Navigator.pushNamed(context, ProductDetailScreen.routeName, arguments: ProductDetailArguments(allProducts[index].id!),);
                           },
+
                           child: Container(
+
                             decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(20),
-                                boxShadow: const [
-                                  BoxShadow(
-                                      blurRadius: 5,
-                                      offset: Offset(2, 2),
-                                      color: Colors.grey
-                                  )
-                                ]
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: const [
+                                BoxShadow(blurRadius: 5, offset: Offset(2, 2), color: Colors.grey),
+                              ],
                             ),
+
                             child: Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 8.0),
+
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
+
                                 children: [
 
                                   /// product image
                                   ClipRRect(
                                     borderRadius: BorderRadius.circular(20),
+
                                     child: CachedNetworkImage(
                                       imageUrl: productImage!,
                                       placeholder: (context, string){
@@ -132,17 +149,20 @@ class ProductsGrid extends StatelessWidget {
                                         );
                                       },
                                       errorWidget: (context, string, dynamic){
-                                        return Icon(Icons.error,color: Colors.black,);
+                                        return const Icon(Icons.error,color: Colors.black);
                                       },
                                       fit: BoxFit.cover,
                                       useOldImageOnUrlChange: true,
                                     ),
+
                                   ),
 
                                   /// product name
-                                  Text(productName!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 12),),
-                                  Text(productCategoryName!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.grey, fontWeight: FontWeight.bold,fontSize: 12),),
-                                  SizedBox(height: 10,),
+                                  Text(productName!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 12)),
+
+                                  Text(productCategoryName!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.grey, fontWeight: FontWeight.bold,fontSize: 12)),
+
+                                  const SizedBox(height: 10),
 
                                   /// product price and discount
                                   Row(
@@ -150,90 +170,130 @@ class ProductsGrid extends StatelessWidget {
 
                                       /// discount red container
                                       (productDiscount != 0)
-                                          ? Container(
+                                          ?
+                                      Container(
                                         width: 40,
                                         height: 30,
                                         decoration: BoxDecoration(
-                                            color: Colors.red,
-                                            borderRadius: BorderRadius.circular(20)
+                                          color: Colors.red,
+                                          borderRadius: BorderRadius.circular(20),
                                         ),
+
                                         child: Center(child: Text("${productDiscount.toString().toPersianDigit()}%", style: const TextStyle(fontFamily: 'Vazir',color: Colors.white, fontWeight: FontWeight.bold,fontSize: 13),)),
                                       )
-                                          : Container(),
+                                          :
+                                      Container(),
 
                                       const Spacer(),
 
                                       Row(
                                         crossAxisAlignment: CrossAxisAlignment.start,
+
                                         children: [
+
                                           Column(
                                             children: [
+
                                               Text(productPrice.toString().toPersianDigit(), style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 13),),
+
                                               (productPriceBeforeDiscount != "0")
-                                                  ? Text(productPriceBeforeDiscount!.toPersianDigit(), style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 11,decoration: TextDecoration.lineThrough),)
-                                                  : Container(),
+                                                  ?
+                                              Text(productPriceBeforeDiscount!.toPersianDigit(), style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 11,decoration: TextDecoration.lineThrough),)
+                                                  :
+                                              Container(),
+
                                             ],
                                           ),
-                                          SizedBox(width: 5,),
+                                          const SizedBox(width: 5),
+
                                           const Text('تومان', style: TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 10),),
+
                                         ],
                                       ),
+
                                     ],
                                   ),
+
                                 ],
                               ),
+
                             ),
+
                           ),
+
                         );
+
                       },
                     ),
+
                   )
-                  : const Expanded(child: Center(child: Text('محصولی برای نمایش وجود ندارد', style: TextStyle(fontFamily: 'Vazir', color: Colors.black)),)),
+                      :
+                  const Expanded(child: Center(child: Text('محصولی برای نمایش وجود ندارد', style: TextStyle(fontFamily: 'Vazir', color: Colors.black)),)),
 
 
                   /// paging loading
                   (state.isLoadingPaging)
-                      ? Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 15.0),
-                          child: DelayedWidget(
-                              delayDuration: const Duration(milliseconds: 100),// Not required
-                              animationDuration: const Duration(milliseconds: 500),// Not required
-                              animation: DelayedAnimations.SLIDE_FROM_BOTTOM,
-                              child: const PagingLoadingWidget(size: 40)
-                          ),
-                        )
-                      : Container(),
+                      ?
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 15.0),
+
+                    child: DelayedWidget(
+                      delayDuration: const Duration(milliseconds: 100),// Not required
+                      animationDuration: const Duration(milliseconds: 500),// Not required
+                      animation: DelayedAnimations.SLIDE_FROM_BOTTOM,
+                      child: const PagingLoadingWidget(size: 40),
+                    ),
+                  )
+                      :
+                  Container(),
+
                 ],
               ),
+
             ),
+
           );
+
         }
 
         if(state.productsDataStatus is ProductsDataError){
           final ProductsDataError productsDataError = state.productsDataStatus as ProductsDataError;
 
           return Center(
+
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+
               children:  [
-                Text(productsDataError.errorMessage,style: const TextStyle(color: Colors.black),),
-                const SizedBox(height: 10,),
+
+                Text(productsDataError.errorMessage,style: const TextStyle(color: Colors.black)),
+
+                const SizedBox(height: 10),
+
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.redAccent),
+
                   onPressed: (){
                     /// call all data again
                     BlocProvider.of<AllProductsCubit>(context).loadProductsData(ProductsParams(categories: categoryId,search: searchText ?? ""));
-
                   },
-                  child:  const Text("تلاس دوباره"),)
+
+                  child:  const Text("تلاس دوباره"),
+                ),
+
               ],
             ),
+
           );
+
         }
 
         return Container();
+
       },
+
     );
+
   }
 
   void setupScrollController(BuildContext context){
@@ -262,4 +322,5 @@ class ProductsGrid extends StatelessWidget {
   //         );
   //   });
   // }
+
 }

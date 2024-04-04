@@ -20,10 +20,11 @@ class AllProductsState {
     bool? newIsLoadingPaging,
   }){
     return AllProductsState(
-        productsDataStatus: newProductsDataStatus ?? productsDataStatus,
-        allProducts: newAllProducts ?? allProducts,
-        nextStart: newNextStart ?? nextStart,
-        isLoadingPaging: newIsLoadingPaging ?? isLoadingPaging,
+      productsDataStatus: newProductsDataStatus ?? productsDataStatus,
+      allProducts: newAllProducts ?? allProducts,
+      nextStart: newNextStart ?? nextStart,
+      isLoadingPaging: newIsLoadingPaging ?? isLoadingPaging,
     );
   }
+
 }
