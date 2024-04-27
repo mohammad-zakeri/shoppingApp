@@ -1064,7 +1064,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(height: 10),
 
                       ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Colors.amber.shade800),
+                        style: ElevatedButton.styleFrom(backgroundColor: Colors.amber.shade800),
 
                         onPressed: (){
                           /// call all data again
